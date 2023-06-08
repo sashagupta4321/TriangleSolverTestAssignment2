@@ -35,7 +35,7 @@ namespace TriangleTest
             int sideB = 50;
             int sideC = 80;
             // Act
-            string result = AnalyzeTriangle(sideA, sideB, sideC);
+            string result = Triangle.AnalyzeTriangle(sideA, sideB, sideC);
 
             //Assert
             Assert.AreEqual("The triangle is valid and is an ISOSCELES", result);
@@ -59,9 +59,9 @@ namespace TriangleTest
         public static void DetermineIsoscelesTriangleInput30and120and30OutputIsIsosceles()
         {
             // Arrange
-            int sideA = 30;
-            int sideB = 120;
-            int sideC = 30;
+            int sideA = 70;
+            int sideB = 40;
+            int sideC = 70;
 
             // Act
             string result = Triangle.AnalyzeTriangle(sideA, sideB, sideC);
@@ -71,12 +71,12 @@ namespace TriangleTest
         }
         //-	Five (5) tests for a valid scalene triangle
         [Test]
-        public static void DetermineScaleneTriangle1Input90and40and50OutputIsScalene()
+        public static void DetermineScaleneTriangle1Input80and40and60OutputIsScalene()
         {
             // Arrange
-            int sideA = 90;
+            int sideA = 80;
             int sideB = 40;
-            int sideC = 50;
+            int sideC = 60;
 
             // Act
             string result = Triangle.AnalyzeTriangle(sideA, sideB, sideC);
@@ -99,7 +99,7 @@ namespace TriangleTest
             Assert.AreEqual("The triangle is valid and is a SCALENE", result);
         }
         [Test]
-        public static void DetermineScaleneTriangle3Input1and2and3OutputIsScalene()
+        public static void DetermineScaleneTriangle3Input1and2and3OutputIsNotScalene()
         {
             // Arrange
             int sideA = 1;
@@ -113,7 +113,7 @@ namespace TriangleTest
             Assert.AreNotEqual("The triangle is valid and is a SCALENE", result);
         }
         [Test]
-        public static void DetermineScaleneTriangle4Input100and70and10OutputIsScalene()
+        public static void DetermineScaleneTriangle4Input100and70and10OutputIsNotScalene()
         {
             // Arrange
             int sideA = 100;
@@ -128,7 +128,7 @@ namespace TriangleTest
         }
 
         [Test]
-        public static void DetermineScaleneTriangle5Input100and11and1OutputIsScalene()
+        public static void DetermineScaleneTriangle5Input100and11and1OutputIsNotScalene()
         {
             // Arrange
             int sideA = 100;
@@ -188,45 +188,51 @@ namespace TriangleTest
             Assert.AreEqual("At least one side of your triangle has a zero length and is thus invalid", output);
         }
 
-       
-
-
-        public static string AnalyzeTriangle(int firstSide, int secondSide, int thirdSide)
+        //-	Three (3) tests for verifying an invalid response (other than a zero length)
+        [Test]
+        public static void DetermineInvalidResponseInputNegative10and40and4OutputInvalidTriangle()
         {
-            string output;
-            if ((firstSide == 0) || (secondSide == 0) || (thirdSide == 0))
-            {
-                output = "At least one side of your triangle has a zero length and is thus invalid";
-                return output;
-            }
+            //Arrange
+            int sideA = -10;
+            int sideB = 40;
+            int sideC = 40;
 
-            if (((firstSide + secondSide) > thirdSide) && ((firstSide + thirdSide) > secondSide) && ((secondSide + thirdSide) > firstSide))
-            {
-                if ((firstSide == secondSide) && (firstSide == thirdSide) && (secondSide == thirdSide))
-                {
-                    output = "The triangle is valid and is an EQUILATERAL";
-                }
-                else if ((firstSide == secondSide) || (secondSide == thirdSide) || (thirdSide == firstSide))
-                {
-                    output = "The triangle is valid and is an ISOSCELES";
+            //Act
+            String output = Triangle.AnalyzeTriangle(sideA, sideB, sideC);
 
-                }
-                else
-                {
-                    output = "The triangle is valid and is a SCALENE";
+            //Assert
+            Assert.AreEqual("A triangle cannot be formed with those numbers", output);
+        }
 
-                }
+        [Test]
+        public static void DetermineInvalidResponseInput40andNegative10and40OutputInvalidTriangle()
+        {
+            //Arrange
+            int sideA = 40;
+            int sideB = -10;
+            int sideC = 40;
 
+            //Act
+            String output = Triangle.AnalyzeTriangle(sideA, sideB, sideC);
 
-            }
-            else
-            {
-                output = "A triangle cannot be formed with those numbers";
-            }
+            //Assert
+            Assert.AreEqual("A triangle cannot be formed with those numbers", output);
+        }
 
+        [Test]
+        public static void DetermineInvalidResponseInput40and40andNegative10OutputInvalidTriangle()
+        {
+            //Arrange
+            int sideA = 40;
+            int sideB = 40;
+            int sideC = -10;
 
-            return output;
+            //Act
+            String output = Triangle.AnalyzeTriangle(sideA, sideB, sideC);
 
+            //Assert
+            Assert.AreEqual("A triangle cannot be formed with those numbers", output);
         }
     }
-}
+       
+    }
