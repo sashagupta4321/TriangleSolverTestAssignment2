@@ -141,7 +141,54 @@ namespace TriangleTest
             // Assert
             Assert.AreNotEqual("The triangle is valid and is a SCALENE", result);
         }
+        
+        //-	Three (3) tests for verifying a zero length for one or more sides
+        [Test]
+        public static void DetermineZeroLenghtInput0and40and40OutputInvalidTriangle()
+        {
+            //Arrange
+            int sideA = 0;
+            int sideB = 40;
+            int sideC = 40;
 
+            //Act
+            String output = Triangle.AnalyzeTriangle(sideA, sideB, sideC);
+
+            //Assert
+            Assert.AreEqual("At least one side of your triangle has a zero length and is thus invalid", output);
+        }
+
+        [Test]
+        public static void DetermineZeroLenghtInput40and0and40OutputInvalidTriangle()
+        {
+            //Arrange
+            int sideA = 40;
+            int sideB = 0;
+            int sideC = 40;
+
+            //Act
+            String output = Triangle.AnalyzeTriangle(sideA, sideB, sideC);
+
+            //Assert
+            Assert.AreEqual("At least one side of your triangle has a zero length and is thus invalid", output);
+        }
+
+        [Test]
+        public static void DetermineZeroLenghtInput40and40and0OutputInvalidTriangle()
+        {
+            //Arrange
+            int sideA = 40;
+            int sideB = 40;
+            int sideC = 0;
+
+            //Act
+            String output = Triangle.AnalyzeTriangle(sideA, sideB, sideC);
+
+            //Assert
+            Assert.AreEqual("At least one side of your triangle has a zero length and is thus invalid", output);
+        }
+
+       
 
 
         public static string AnalyzeTriangle(int firstSide, int secondSide, int thirdSide)
